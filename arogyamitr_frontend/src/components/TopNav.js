@@ -8,6 +8,8 @@ import React from 'react';
  * @param {function} props.toggleTheme
  * @param {string} props.theme
  */
+import NotificationBell from "./NotificationBell";
+
 const TopNav = ({ toggleSidebar, toggleTheme, theme }) => (
   <header className="topnav">
     <button
@@ -16,6 +18,8 @@ const TopNav = ({ toggleSidebar, toggleTheme, theme }) => (
       onClick={toggleSidebar}
     >☰</button>
     <span className="brand-title">ArogyaMitr</span>
+    {/* NotificationBell component */}
+    <NotificationBell />
     <button
       className="theme-toggle"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}

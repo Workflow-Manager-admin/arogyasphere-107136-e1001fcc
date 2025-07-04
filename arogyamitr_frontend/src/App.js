@@ -16,7 +16,9 @@ import EducationHub from './pages/EducationHub';
 import Chatbot from './pages/Chatbot';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import Notifications from './pages/Notifications';
 
+import { NotificationProvider } from './context/NotificationContext';
 import './App.css';
 
 /*
@@ -39,40 +41,43 @@ function App() {
   const isAuthenticated = true; // TODO: replace with real auth state
 
   return (
-    <Router>
-      <Routes>
-        {/* Auth routes (public) */}
-        <Route path="/login" element={<Login toggleTheme={toggleTheme} />} />
-        <Route path="/signup" element={<Signup toggleTheme={toggleTheme} />} />
+    <NotificationProvider>
+      <Router>
+        <Routes>
+          {/* Auth routes (public) */}
+          <Route path="/login" element={<Login toggleTheme={toggleTheme} />} />
+          <Route path="/signup" element={<Signup toggleTheme={toggleTheme} />} />
 
-        {/* App routes (protected/private) */}
-        <Route
-          path="/*"
-          element={
-            isAuthenticated
-              ? <Layout toggleTheme={toggleTheme} theme={theme}>
-                  <Routes>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/wellness-path" element={<WellnessPath />} />
-                    <Route path="/diet" element={<Diet />} />
-                    <Route path="/fitness" element={<Fitness />} />
-                    <Route path="/mindfulness" element={<Mindfulness />} />
-                    <Route path="/sleep" element={<Sleep />} />
-                    <Route path="/conscious-choices" element={<ConsciousChoices />} />
-                    <Route path="/care-connect" element={<CareConnect />} />
-                    <Route path="/support-groups" element={<SupportGroups />} />
-                    <Route path="/education-hub" element={<EducationHub />} />
-                    <Route path="/chatbot" element={<Chatbot />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="*" element={<Dashboard />} />
-                  </Routes>
-                </Layout>
-              : <Navigate to="/login" />
-          }
-        />
-      </Routes>
-    </Router>
+          {/* App routes (protected/private) */}
+          <Route
+            path="/*"
+            element={
+              isAuthenticated
+                ? <Layout toggleTheme={toggleTheme} theme={theme}>
+                    <Routes>
+                      <Route path="/" element={<Dashboard />} />
+                      <Route path="/wellness-path" element={<WellnessPath />} />
+                      <Route path="/diet" element={<Diet />} />
+                      <Route path="/fitness" element={<Fitness />} />
+                      <Route path="/mindfulness" element={<Mindfulness />} />
+                      <Route path="/sleep" element={<Sleep />} />
+                      <Route path="/conscious-choices" element={<ConsciousChoices />} />
+                      <Route path="/care-connect" element={<CareConnect />} />
+                      <Route path="/support-groups" element={<SupportGroups />} />
+                      <Route path="/education-hub" element={<EducationHub />} />
+                      <Route path="/chatbot" element={<Chatbot />} />
+                      <Route path="/profile" element={<Profile />} />
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/notifications" element={<Notifications />} />
+                      <Route path="*" element={<Dashboard />} />
+                    </Routes>
+                  </Layout>
+                : <Navigate to="/login" />
+            }
+          />
+        </Routes>
+      </Router>
+    </NotificationProvider>
   );
 }
 
