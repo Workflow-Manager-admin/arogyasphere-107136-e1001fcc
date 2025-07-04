@@ -2,8 +2,8 @@ import React from 'react';
 import SocialAuthPlaceholder from './SocialAuthPlaceholder';
 
 // PUBLIC_INTERFACE
-// Login Page for ArogyaMitr with styled login form, navigation to signup, and social placeholders.
-export default function Login({ toggleTheme }) {
+// Signup (Registration) Page for ArogyaMitr with styled form and social placeholders.
+export default function Signup({ toggleTheme }) {
   return (
     <div
       style={{
@@ -32,18 +32,19 @@ export default function Login({ toggleTheme }) {
           alignItems: "center"
         }}
       >
-        <h2 style={{ color: "var(--primary)", fontWeight: 700, marginBottom: 6 }}>Login</h2>
+        <h2 style={{ color: "var(--primary)", fontWeight: 700, marginBottom: 6 }}>Sign Up</h2>
         <form style={{ width: "100%", display: "flex", flexDirection: "column", gap: "16px" }}>
+          <input style={inputStyle} type="text" placeholder="Full Name" autoComplete="name" />
           <input style={inputStyle} type="email" placeholder="Email" autoComplete="email" />
-          <input style={inputStyle} type="password" placeholder="Password" autoComplete="current-password" />
-          <button type="submit" style={submitBtnStyle}>Login</button>
+          <input style={inputStyle} type="password" placeholder="Password" autoComplete="new-password" />
+          <button type="submit" style={submitBtnStyle}>Sign Up</button>
         </form>
         <div style={{ fontSize: 14, margin: "18px 0 6px 0", color: "var(--text-primary)" }}>
-          Or login with
+          Or sign up with
         </div>
         <SocialAuthPlaceholder />
         <div style={{ fontSize: 13, marginTop: 14 }}>
-          New to ArogyaMitr? <a href="/signup" style={linkStyle}>Sign up</a>
+          Already have an account? <a href="/login" style={linkStyle}>Login</a>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Layout from './layouts/Layout';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import WellnessPath from './pages/WellnessPath';
 import Diet from './pages/Diet';
 import Fitness from './pages/Fitness';
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         {/* Auth routes (public) */}
         <Route path="/login" element={<Login toggleTheme={toggleTheme} />} />
+        <Route path="/signup" element={<Signup toggleTheme={toggleTheme} />} />
 
         {/* App routes (protected/private) */}
         <Route
