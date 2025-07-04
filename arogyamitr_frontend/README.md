@@ -11,6 +11,16 @@ This project provides a minimal React template with a clean, modern UI and minim
 
 ## Getting Started
 
+### API Backend Configuration
+
+You must configure the base URL for the external backend API. Create a `.env` file at the root of the `arogyamitr_frontend` project (same level as package.json) and add:
+
+```
+REACT_APP_API_BASE_URL=https://your.api.backend/v1
+```
+
+Change the value to match your actual backend API root URL. Service modules use this variable for all API requests.
+
 In the project directory, you can run:
 
 ### `npm start`
