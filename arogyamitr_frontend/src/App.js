@@ -17,6 +17,7 @@ import Chatbot from './pages/Chatbot';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Notifications from './pages/Notifications';
+import Devices from './pages/Devices';
 
 import { NotificationProvider } from './context/NotificationContext';
 import './App.css';
@@ -62,6 +63,7 @@ function App() {
                       <Route path="/mindfulness" element={<Mindfulness />} />
                       <Route path="/sleep" element={<Sleep />} />
                       <Route path="/conscious-choices" element={<ConsciousChoices />} />
+                      <Route path="/devices" element={<Devices />} />
                       <Route path="/care-connect" element={<CareConnect />} />
                       <Route path="/support-groups" element={<SupportGroups />} />
                       <Route path="/education-hub" element={<EducationHub />} />

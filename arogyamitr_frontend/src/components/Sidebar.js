@@ -16,6 +16,7 @@ const Sidebar = ({ open }) => {
     { to: '/fitness', label: 'Fitness' },
     { to: '/mindfulness', label: 'Mindfulness' },
     { to: '/sleep', label: 'Sleep' },
+    { to: '/devices', label: 'Devices' }, // Newly added Devices page
     { to: '/conscious-choices', label: 'Conscious Choices' },
     { to: '/care-connect', label: 'Care & Connect' },
     { to: '/support-groups', label: 'Support Groups' },
