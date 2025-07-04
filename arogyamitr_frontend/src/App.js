@@ -1,12 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Layout from './layouts/Layout';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import WellnessPath from './pages/WellnessPath';
+import Diet from './pages/Diet';
+import Fitness from './pages/Fitness';
+import Mindfulness from './pages/Mindfulness';
+import Sleep from './pages/Sleep';
+import ConsciousChoices from './pages/ConsciousChoices';
+import CareConnect from './pages/CareConnect';
+import SupportGroups from './pages/SupportGroups';
+import EducationHub from './pages/EducationHub';
+import Chatbot from './pages/Chatbot';
+import Profile from './pages/Profile';
+import Settings from './pages/Settings';
+
 import './App.css';
 
-// PUBLIC_INTERFACE
+/*
+PUBLIC_INTERFACE
+Root App entry point for ArogyaMitr, managing theme, app-level routing, and persistent layout.
+*/
 function App() {
   const [theme, setTheme] = useState('light');
 
-  // Effect to apply theme to document element
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
@@ -16,33 +34,43 @@ function App() {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
+  // Example logic for private route (replace with proper auth logic later)
+  const isAuthenticated = true; // TODO: replace with real auth state
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Auth routes (public) */}
+        <Route path="/login" element={<Login toggleTheme={toggleTheme} />} />
+
+        {/* App routes (protected/private) */}
+        <Route
+          path="/*"
+          element={
+            isAuthenticated
+              ? <Layout toggleTheme={toggleTheme} theme={theme}>
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/wellness-path" element={<WellnessPath />} />
+                    <Route path="/diet" element={<Diet />} />
+                    <Route path="/fitness" element={<Fitness />} />
+                    <Route path="/mindfulness" element={<Mindfulness />} />
+                    <Route path="/sleep" element={<Sleep />} />
+                    <Route path="/conscious-choices" element={<ConsciousChoices />} />
+                    <Route path="/care-connect" element={<CareConnect />} />
+                    <Route path="/support-groups" element={<SupportGroups />} />
+                    <Route path="/education-hub" element={<EducationHub />} />
+                    <Route path="/chatbot" element={<Chatbot />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="*" element={<Dashboard />} />
+                  </Routes>
+                </Layout>
+              : <Navigate to="/login" />
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
