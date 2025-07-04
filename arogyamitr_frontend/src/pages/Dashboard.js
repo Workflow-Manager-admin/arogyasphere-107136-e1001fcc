@@ -1,70 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAppContext } from "../context/AppContext";
 
 /*
 PUBLIC_INTERFACE
-Dashboard page for ArogyaMitr: shows personalized greetings, highlight insights, and a responsive grid
-of modular health/stat cards and chart placeholders.
-- Modern visual layout: grid of cards in 2 columns (desktop) or stacked (mobile)
-- Sectional greetings and insight banners
-- Cards are ready for real data, now with placeholders for chart, stat, and info modules
-- Focused on lightweight, extensible UI and responsiveness
+Dashboard page for ArogyaMitr: uses AppContext for personalized greetings and stat cards;
+future-proof for async dashboard fetch on mount.
+Modern visual layout: grid of cards, sectional greetings/banners.
 */
 export default function Dashboard() {
-  // Future: these values should come from context or API/backend
-  const userName = "Priya"; // Placeholder for current user
+  const { user, dashboardState, fetchDashboardData, isLoading } = useAppContext();
   const todayGreeting = getGreeting();
-
-  // Sample stat highlights
-  const statCards = [
-    {
-      key: "steps",
-      label: "Steps Today",
-      value: "8,231",
-      description: "Target: 10k",
-      icon: "👣",
-      accent: "#F3B53F"
-    },
-    {
-      key: "sleep",
-      label: "Sleep Last Night",
-      value: "7h 15m",
-      description: "Sleep Score: 86",
-      icon: "🛌",
-      accent: "#2D8C7E"
-    },
-    {
-      key: "mindfulness",
-      label: "Mindful Minutes",
-      value: "22 min",
-      description: "Streak: 5 days",
-      icon: "🧘‍♀️",
-      accent: "#384D6C"
-    },
-    {
-      key: "hydration",
-      label: "Water Intake",
-      value: "1.7L",
-      description: "Goal: 2.5L",
-      icon: "💧",
-      accent: "#45A3FC"
-    }
-  ];
+  // future: handle loading state more gracefully in UI
+  useEffect(() => {
+    // Would fetch/refresh when mounting (real API later)
+    fetchDashboardData();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <section>
       {/* Greeting and insight banner */}
       <div className="dashboard-greeting">
         <h2>
-          {todayGreeting}, <span className="dashboard-username">{userName}</span>!
+          {todayGreeting},{" "}
+          <span className="dashboard-username">{user?.name?.split(" ")[0] || "User"}</span>!
         </h2>
         <p className="dashboard-insight">
           Here are your key health stats and progress today. Keep up the great work!
         </p>
       </div>
-
+      {isLoading && (
+        <div style={{ textAlign: "center", color: "#999", marginBottom: 16 }}>Loading dashboard...</div>
+      )}
       {/* Responsive card grid: stats and chart placeholders */}
       <div className="dashboard-card-grid">
-        {statCards.map(card => (
+        {dashboardState.statCards?.map(card => (
           <StatCard key={card.key} {...card} />
         ))}
         <ChartCard
